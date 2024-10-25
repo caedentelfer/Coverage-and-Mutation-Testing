@@ -1,0 +1,6 @@
+- name: Store1
+  requestedItems:
+  - item1
+- name: Store2
+  requestedItems:
+  - item2

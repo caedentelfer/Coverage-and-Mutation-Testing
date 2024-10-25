@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tut-project</a> &gt; <a href="index.source.html" class="el_package">com.truckpacker</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package com.truckpacker;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * @brief Main class for the truckpacker knapsack problem.
+ * @details The class is now refactored to accept inputs directly without reading files.
+ */
+<span class="nc" id="L11">public class Main {</span>
+    
+    public static void main(String[] args) {
+<span class="fc" id="L14">        int maxItems = 5;</span>
+<span class="fc" id="L15">        int maxVolume = 50;</span>
+<span class="fc" id="L16">        List&lt;GoodsItem&gt; items = List.of(</span>
+            new GoodsItem(&quot;item1&quot;, 10, 20, 2),
+            new GoodsItem(&quot;item2&quot;, 5, 15, 3),
+            new GoodsItem(&quot;item3&quot;, 8, 25, 1)
+        );
+<span class="fc" id="L21">        List&lt;Store&gt; stores = List.of(</span>
+<span class="fc" id="L22">            new Store(&quot;Store1&quot;, List.of(&quot;item1&quot;, &quot;item2&quot;)),</span>
+<span class="fc" id="L23">            new Store(&quot;Store2&quot;, List.of(&quot;item3&quot;))</span>
+        );
+
+<span class="fc" id="L26">        executeKnapsack(maxItems, maxVolume, items, stores);</span>
+<span class="fc" id="L27">    }</span>
+
+    /**
+     * @brief Executes the knapsack algorithm and prints the results.
+     * @param maxItems Maximum number of items that can be packed.
+     * @param maxVolume Maximum volume of the knapsack.
+     * @param items List of available goods items.
+     * @param stores List of stores requesting items.
+     */
+    public static void executeKnapsack(int maxItems, int maxVolume, List&lt;GoodsItem&gt; items, List&lt;Store&gt; stores) {
+        // Create a KnapsackSolver instance and solve the knapsack problem
+<span class="fc" id="L38">        KnapsackSolver solver = new KnapsackSolver();</span>
+<span class="fc" id="L39">        Map&lt;List&lt;GoodsItem&gt;, Set&lt;String&gt;&gt; result = solver.solveKnapsack(items, maxVolume, maxItems, stores);</span>
+
+        // Handle the result
+        
+<span class="fc" id="L43">        List&lt;GoodsItem&gt; packedItems = result.keySet().iterator().next();</span>
+<span class="fc" id="L44">        Set&lt;String&gt; storesToVisit = result.values().iterator().next();</span>
+
+        // Print packed items
+<span class="fc" id="L47">        System.out.println(&quot;Packed items:&quot;);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (GoodsItem item : packedItems) {</span>
+<span class="fc" id="L49">            System.out.println(item);</span>
+<span class="fc" id="L50">        }</span>
+
+        // Print stores to visit
+<span class="fc" id="L53">        System.out.println(&quot;\nStores to visit:&quot;);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        for (String store : storesToVisit) {</span>
+<span class="fc" id="L55">            System.out.println(store);</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

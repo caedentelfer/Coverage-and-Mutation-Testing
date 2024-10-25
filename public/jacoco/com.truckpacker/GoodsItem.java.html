@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GoodsItem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tut-project</a> &gt; <a href="index.source.html" class="el_package">com.truckpacker</a> &gt; <span class="el_source">GoodsItem.java</span></div><h1>GoodsItem.java</h1><pre class="source lang-java linenums">package com.truckpacker;
+
+/**
+ * @brief GoodsItem class for the truckpacker knapsack problem.
+ */
+public class GoodsItem {
+    private final String name;
+    private final int volume;
+    private final int value;
+    private final int maxCount;
+
+    /**
+     * @brief Constructor for the GoodsItem class.
+     * @param name Name of the item
+     * @param volume Volume of the item
+     * @param value Value of the item
+     * @param maxCount Maximum number of items that can be packed
+     */
+<span class="fc" id="L19">    public GoodsItem(String name, int volume, int value, int maxCount) {</span>
+<span class="fc" id="L20">        this.name = name;</span>
+<span class="fc" id="L21">        this.volume = volume;</span>
+<span class="fc" id="L22">        this.value = value;</span>
+<span class="fc" id="L23">        this.maxCount = maxCount;</span>
+<span class="fc" id="L24">    }</span>
+
+    /**
+     * @return Name of the item
+     */
+    public String getName() {
+<span class="fc" id="L30">        return name;</span>
+    }
+
+    /**
+     * @return Volume of the item
+     */
+    public int getVolume() {
+<span class="fc" id="L37">        return volume;</span>
+    }
+
+    /**
+     * @return Value of the item
+     */
+    public int getValue() {
+<span class="fc" id="L44">        return value;</span>
+    }
+
+    /**
+     * @return Maximum number of items that can be packed
+     */
+    public int getMaxCount() {
+<span class="fc" id="L51">        return maxCount;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

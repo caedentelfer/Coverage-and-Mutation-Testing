@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Store1",
+        "requestedItems": ["item1", "item3"]
+    },
+    {
+        "name": "Store2",
+        "requestedItems": ["item2", "item4"]
+    }
+]

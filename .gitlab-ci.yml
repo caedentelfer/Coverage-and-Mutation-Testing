@@ -1,0 +1,86 @@
+image: maven:3.8.6
+
+stages:
+  - build
+  - test
+  - report-and-pages
+  - pages  # New stage for GitLab Pages deployment
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+# Build stage to compile the project
+build:
+  stage: build
+  script:
+    - cd tut-project
+    - mvn clean compile
+  tags:
+    - shared-docker-runner
+  artifacts:
+    paths:
+      - tut-project/target/
+
+# Test stage to only run the tests
+test:
+  stage: test
+  script:
+    - cd tut-project
+    - mvn test
+  tags:
+    - shared-docker-runner
+  artifacts:
+    when: always
+    paths:
+      - tut-project/target/surefire-reports/
+    expire_in: 1 week
+  allow_failure: false
+
+# Combined stage for Coverage, Mutation testing, and Pages generation
+coverage-mutation-pages:
+  stage: report-and-pages
+  dependencies:
+    - test
+  script:
+    - cd tut-project
+    # Generate JaCoCo coverage report
+    - mvn test jacoco:report
+    # Run PIT mutation tests
+    - mvn org.pitest:pitest-maven:mutationCoverage
+
+    # Create public directory for Pages inside tut-project
+    - mkdir -p public/jacoco
+    - mkdir -p public/pit
+
+    # Check if the reports are available
+    - ls target/site/jacoco/ || echo "JaCoCo report directory not found."
+    - ls target/pit-reports/ || echo "PIT report directory not found."
+
+    # Copy the reports to the public folder for GitLab Pages
+    - cp -r target/site/jacoco/* public/jacoco/ || echo "JaCoCo report not found."
+    - cp -r target/pit-reports/* public/pit/ || echo "PIT report not found."
+
+    # Move the public folder to the root directory so GitLab Pages can find it
+    - mv $CI_PROJECT_DIR/tut-project/public $CI_PROJECT_DIR/public
+
+    # Confirm the contents of the public folder in the root
+    - ls -la $CI_PROJECT_DIR/public
+  tags:
+    - shared-docker-runner
+  artifacts:
+    paths:
+      - public  # Path to the root-level public folder
+    expire_in: 1 week
+
+# New stage for GitLab Pages deployment
+pages-test:
+  stage: pages
+  script:
+    - echo "Deploying to GitLab Pages..."
+  artifacts:
+    paths:
+      - public  # Ensure the root-level public folder is uploaded
+  only:
+    - main  # Ensure this runs only on the main branch
+  tags:
+    - shared-docker-runner

@@ -1,0 +1,8 @@
+maxItems: 5
+goods:
+- name: item1
+  volume: 2
+  value: 3
+- name: item2
+  volume: 3
+  value: 4

@@ -1,0 +1,11 @@
+{
+    "maxItems": 5,
+    "goods": [
+      { "name": "item1", "volume": 3, "value": 10 },
+      { "name": "item2", "volume": 2, "value": 5 },
+      { "name": "item3", "volume": 6, "value": 12 },
+      { "name": "item4", "volume": 2, "value": 3 },
+      { "name": "item5", "volume": 4, "value": 7 }
+    ]
+  }
+  
